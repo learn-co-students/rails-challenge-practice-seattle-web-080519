@@ -1,4 +1,5 @@
 <h1>View a Company</h1>
+<%= render partial: "companies/errors", locals: {user: @company} %>
 
 <h3>Name: <%= @company.name %></h3>
 <h3>Offices: </h3>
@@ -7,21 +8,21 @@
 <% end %> -->
 <%= @company.office_info.join(" \n") %>
 
-
-
 <h3>Total Rent: </h3>
 <%= @company.total_rent %>
-
-
 
 <h3>Add an Employee</h3>
 
 <%= form_for @employee do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <div class="field">  
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+   <div class="field">  
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
   
   <%= f.hidden_field :company_id, value: @company.id %>
   <%= f.submit %>
@@ -29,16 +30,6 @@
 
 <h3>Employees List: </h3>
 <% @company.employees.each do |employee| %>
-  Name: <%= employee.name %>, Title: <%= employee.title %><%= link_to "Delete Employee", company_path(employee.id), method: :delete, data: { confirm: "Really?" } %><br>
+  Name: <%= employee.name %>, Title: <%= employee.title %>
+  <%= link_to "Delete Employee", employee_delete_path(employee.id), method: :delete, data: { confirm: "Really?" } %><br>
 <% end %>
-
-
-
-<!-- 
-On this page, a user should be able to see a list of all of its offices, as well as the building in which the office is located
-On this page, a user should be able to see how much total rent it is paying
-On this page, a user should be able to see a list of all employees
-On this page, a user should be able to add an employee to the company
-
-On this page, a user should be able to remove an employee from the company
- -->

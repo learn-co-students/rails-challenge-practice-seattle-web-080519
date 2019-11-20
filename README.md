@@ -45,28 +45,29 @@ The product team has deemed the following features as crucial:
 #### Building:
 
 - Users should be able to see a single building's details 
-	- On this page, a user should be able to see all of the companies that have offices in the building
-	- On this page, a user should be able to see how much total rent that building is making based on all the companies that have rented offices in that building
-- Users should be able to see a list of all buildings, as well as a list of all available floors for each building.
+	[-] On this page, a user should be able to see all of the companies that have offices in the building
+	[-] On this page, a user should be able to see how much total rent that building is making based on all the companies that have rented offices in that building
+[-] Users should be able to see a list of all buildings, as well as a list of all available floors for each building.
 	- **_Hint_** this should be a list of the floor numbers that are available: 1, 3, 6, 8 etc. You may want to save this detail for later
-- Users should be able to update a building's details
+[-] Users should be able to update a building's details
 
 #### Company:
 
-- Users should be able to create a new company and choose any number of buildings to open an office in, as well as the floors that the company would like to purchase
+[-] Users should be able to create a new company and choose any number of buildings to open an office in, as well as the floors that the company would like to purchase
 	- We have provided you with helper functions in the Building model to assist you in figuring out which offices are currently open, as well as the form itself. Spend some time looking over the code, but your main responsibility will be to handle the form's submission. 
-- Users should be able to see a show page for an individual company
- - On this page, a user should be able to see a list of all of its offices, as well as the building in which the office is located 
- - On this page, a user should be able to add an employee to the company 
- - On this page, a user should be able to see a list of all employees 
- - On this page, a user should be able to remove an employee from the company 
- - On this page, a user should be able to see how much total rent it is paying
+[-] Users should be able to see a show page for an individual company
+ [-] On this page, a user should be able to see a list of all of its offices, as well as the building in which the office is located 
+ [-] On this page, a user should be able to see how much total rent it is paying
+ [-] On this page, a user should be able to see a list of all employees 
+ [-] On this page, a user should be able to add an employee to the company 
+ [-] On this page, a user should be able to remove an employee from the company 
+ 
 
 #### Validations:
 
 - Don't mess up our database! Make sure that every value is filled in! If a user fails to enter details, please ensure that your remind them of this failure!
 - Please ensure that a user's name is longer than 5 characters!
-- Please ensure that an office's floor is an integer!
+[-] Please ensure that an office's floor is an integer!
 
 #### Bonus Deliverables:
 

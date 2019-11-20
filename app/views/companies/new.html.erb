@@ -1,4 +1,3 @@
 <h1>Add a Company</h1>
-
+<%= render partial: "companies/errors", locals: {user: @company} %>
 <%= render partial: "form" %>
-<%= link_to "View all Companies", companies_path %>

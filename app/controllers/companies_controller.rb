@@ -14,11 +14,23 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = Company.create(company_params)
+    @company = Company.new(company_params)
     if @company.save
-      redirect_to companies_path
+      params[:company][:offices_attributes].each do |k, building_data|
+        @building = Building.find(building_data[:id])
+        if @building
+          @floors = building_data[:offices]
+          @floors.each do |floor|
+            if !floor.empty?
+              Office.create(building: @building, company: @company, floor: floor)
+            end
+          end
+        end
+      end
+    flash[:success] = "Company successfully created"
+    redirect_to company_path(@company)
     else
-      puts @company.errors.full_messages
+      flash[:error] = "Company not created"
       render :new
     end
   end
@@ -30,28 +42,49 @@ class CompaniesController < ApplicationController
   def update
     find_company
     if @company.employees.create(employee_params) && @company.update(company_params)
+      flash[:success] = "Company successfully updated"
       redirect_to company_path(@company)
     else
+      flash[:error] = "Company not updated"
       render :edit
     end
   end
 
   def destroy
-    find_company
+    @company = Company.find(params[:id])
+    if @company.destroy
+      flash[:success] = "Company successfully deleted"
+    else
+      flash[:error] = "Company not deleted"
+    end
+    redirect_to request.referrer
+  end
+
+  def destroy_employee
     @employee = Employee.find(params[:id])
-    @employee.destroy
-    redirect_to company_path(@company)
+    if @employee.destroy
+      flash[:success] = "Employee successfully deleted"
+    else
+      flash[:error] = "Employee not deleted"
+    end
+    redirect_to request.referrer
   end
 
   def add_employee
     @company = Company.find(params[:employee][:company_id])
     @employee = Employee.new(employee_params)
     if @employee.save
+      flash[:success] = "Employee successfully added"
       redirect_to company_path(@company.id)
     else
+      flash[:error] = "Employee not added"
       puts "Error in add employee, #{@employee.errors.full_messages}"
       redirect_to company_path(@company.id)
     end
+  end
+
+  def show_office
+    
   end
 
 

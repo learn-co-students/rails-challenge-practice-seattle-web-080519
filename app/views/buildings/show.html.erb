@@ -8,8 +8,12 @@
 <h3>Floors Available: <%= @building.floors_available.join(", ") %></h3>
 <h3># Empty Floors: <%= @building.empty_offices %></h3>
 <h3>Total Rent: <%= @building.total_rent %></h3>
+<% byebug %>
+<h3># Employees: <%= @building.total_rent %></h3>
 
 <h3>Building Tennants: </h3>
 <% @building.companies.each do |company| %>
   <%= company.name %><%= company.offices.pluck("floor") %> <br>
 <% end %>
+<br>
+<%= link_to "Edit this Building" , edit_building_path(@building) %>

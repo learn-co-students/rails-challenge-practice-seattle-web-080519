@@ -2,7 +2,8 @@ class Building < ApplicationRecord
 
   has_many :offices
   has_many :companies, through: :offices
-  
+  validates_presence_of :name, :country, :address, :rent_per_floor, :number_of_floors
+
   def floors_available
     all_floors = Array(1..self.number_of_floors)
     available_floors_array = all_floors
