@@ -60,16 +60,6 @@ class CompaniesController < ApplicationController
     redirect_to request.referrer
   end
 
-  def destroy_employee
-    @employee = Employee.find(params[:id])
-    if @employee.destroy
-      flash[:success] = "Employee successfully deleted"
-    else
-      flash[:error] = "Employee not deleted"
-    end
-    redirect_to request.referrer
-  end
-
   def add_employee
     @company = Company.find(params[:employee][:company_id])
     @employee = Employee.new(employee_params)
@@ -83,8 +73,24 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def destroy_employee
+    @employee = Employee.find(params[:id])
+    if @employee.destroy
+      flash[:success] = "Employee successfully deleted"
+    else
+      flash[:error] = "Employee not deleted"
+    end
+    redirect_to request.referrer
+  end
+
   def show_office
-    
+    @office = Office.find(params[:id])
+    # redirect_to show_office
+  end
+
+  def index_of_offices
+    @offices = Office.all
+    # redirect_to offices_path
   end
 
 

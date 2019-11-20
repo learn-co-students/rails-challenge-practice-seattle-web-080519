@@ -74,10 +74,10 @@ The product team has deemed the following features as crucial:
 HR has deemed it legal for us to say that a BONUS will be available if you can accomplish any of the following:
 
 - Users should be able to see the an office show page with the following: 
-	- The building it is in 
-	- The company that is using it 
-	- The employees that are working in it
-- Users should be able to see the number of employees in a building on the building's show page
+	[-] The building it is in 
+	[-] The company that is using it 
+	[-] The employees that are working in it
+[-] Users should be able to see the number of employees in a building on the building's show page
 
 **WARNING**
 

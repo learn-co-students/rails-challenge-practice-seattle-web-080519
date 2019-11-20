@@ -12,6 +12,7 @@
 
     <%= link_to "View all Buildings", buildings_path %>
     <%= link_to "View all Companies", companies_path %>
+    <%= link_to "View all Offices", offices_path %>
     <% flash.each do |key, value| %>
         <%= content_tag :div, value, class: "flash #{key}" %>
     <% end %>

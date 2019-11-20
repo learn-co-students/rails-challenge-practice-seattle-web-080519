@@ -1,0 +1,11 @@
+<h1>View all Offices</h1>
+
+<%= @offices.all.each do |office| %>
+  ID: <%= office.id %>
+  Floor: <%= office.floor %>
+  Building id: <%= office.building_id %>
+  Company id: <%= office.company_id %>
+  <%= link_to "View this Office", office_path(office) %>
+  <br>
+
+<% end %>

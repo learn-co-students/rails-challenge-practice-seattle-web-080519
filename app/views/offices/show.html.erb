@@ -1,3 +1,25 @@
 <h1>Show an Office</h1>
 
-<%= @office.name %>
+<% byebug %>
+
+<h3>Office</h3>
+ID: <%= @office.id %><br>
+Floor: <%= @office.floor %><br>
+Building id: <%= @office.building_id %><br>
+Company id: <%= @office.company_id %><br>
+# Employees: <%= @office.company.employees.count %><br>
+List of Employees: <%= @office.company.employees.pluck("name", "title").flatten %><br>
+
+<h3>Building</h3>
+Name: <%= @office.building.name %><br>
+Address: <%= @office.building.address %><br>
+Country: <%= @office.building.country %><br>
+Rent/Floor: <%= @office.building.rent_per_floor %><br>
+# Floors: <%= @office.building.number_of_floors %><br>
+ID: <%= @office.building.id %><br>
+
+<h3>Company</h3>
+Name: <%= @office.company.name %><br>
+ID: <%= @office.company.id %><br>
+
+
