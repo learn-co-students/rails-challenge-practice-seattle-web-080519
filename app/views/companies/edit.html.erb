@@ -1,3 +1,30 @@
 <h1>Edit a Company</h1>
 
-<%= render partial: "form" %>
+<!-- <%= render partial: "form" %> -->
+<% byebug %>
+<%= @company %>
+<%= form_for @company do |f| %>
+<p>Company Details</p>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+<p>Building Floors Available</p>
+	<% Building.all.each do |b| %>
+    <%= f.fields_for :offices, b do |b_field| %>
+    <% byebug %>
+			<%= b_field.hidden_field :id %>
+      <%= b_field.label b.name %>
+      <%= b_field.collection_check_boxes :offices, b.floors_available_and_curr_company_floors, :floor, :floor 
+       %><br>
+		<% end %>
+	<% end %>
+	<br>
+	<%= f.submit %>
+<% end %>
+
+<!-- checked: b.floors_available.!include(b.floor) -->
+<!--  want to show list of floors that are available, including ones that this company already has rented. Then, show the available ones as open, and rented as checked. -->
+
+<!-- b.floors_available shows available floors, but does not show a floor that the own company has booked. b.all_floors shows every floor as open. -->
+
+<!-- pseude code checkboxes = empty floors + this company.floor. this company.floor is checked -->

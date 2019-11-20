@@ -57,11 +57,11 @@ end
 
 10.times do 
   random_building = Building.all.sample
-  random_building_floors_array = (1...random_building.number_of_floors).to_a
+  random_building_floors_array = (1..random_building.number_of_floors).to_a
   Office.create(
     company: Company.all.sample,
     building: random_building,
-    floor: rand(1...random_building.number_of_floors)
+    floor: random_building_floors_array.delete(random_building_floors_array.sample)
   )
 end
 

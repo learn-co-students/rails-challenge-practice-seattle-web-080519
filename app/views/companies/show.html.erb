@@ -3,12 +3,11 @@
 
 <h3>Name: <%= @company.name %></h3>
 <h3>Offices: </h3>
-<!-- <%= @company.office_info.each do |office_info| %>
+<% @company.office_info.each do |office_info| %>
   <%= office_info %><br>
-<% end %> -->
-<%= @company.office_info.join(" \n") %>
+<% end %>
 
-<h3>Total Rent: </h3>
+<h3>Company's Total Rent: </h3>
 <%= @company.total_rent %>
 
 <h3>Add an Employee</h3>

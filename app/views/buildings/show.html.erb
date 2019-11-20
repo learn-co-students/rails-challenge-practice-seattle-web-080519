@@ -4,11 +4,10 @@
 <h3>Address: <%= @building.address %></h3>
 <h3>Country: <%= @building.country %></h3>
 <h3>Floors: <%= @building.number_of_floors %></h3>
-<h3>Rent/Floor: <%= @building.rent_per_floor %></h3>
 <h3>Floors Available: <%= @building.floors_available.join(", ") %></h3>
 <h3># Empty Floors: <%= @building.empty_offices %></h3>
-<h3>Total Rent: <%= @building.total_rent %></h3>
-<h3># Employees: <%= @building.total_rent %></h3>
+<h3>Rent/Floor: <%= @building.rent_per_floor %></h3>
+<h3>Total Rent: $<%= @building.total_rent %></h3>
 
 <h3>Building Tennants: </h3>
 <% @building.companies.each do |company| %>
