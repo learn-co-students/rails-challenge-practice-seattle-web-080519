@@ -1,13 +1,27 @@
 <h1>View all Buildings</h1>
-
-<% @buildings.each do |building| %>
-  <p>Building Name: <%= building.name %><br>
-  Building Address: <%= building.address %><br>
-  Country: <%= building.country %><br>
-  # Floors: <%= building.number_of_floors %><br>
-  Floors Available: <%= building.floors_available.join(", ") %><br>
-  Rent/Floor: <%= building.rent_per_floor %></p><br>
-  <%= link_to "View this Building", building_path(building) %>
-  <%= link_to "Edit this Building" , edit_building_path(building) %>
-  <hr>
-<% end %>
+<table>
+  <tr>
+    <td>Name </td>
+    <td>Address </td>
+    <td>Country </td>
+    <td>Total Floors</td>
+    <td>Num Floors Available</td>
+    <td>Floors Available</td>
+    <td>Rent/Floor</td>
+  </tr>
+  <tr>
+    <% @buildings.each do |building| %>
+    <tr>
+      <td><%= building.name %></td>
+      <td><%= building.address %></td>
+      <td><%= building.country %></td>
+      <td><%= building.number_of_floors %></td>
+      <td><%= building.empty_offices %></td>
+      <td><%= building.floors_available.join(", ") %></td>
+      <td><%= building.rent_per_floor %></td>
+      <td><%= link_to "View this Building", building_path(building) %></td>
+      <td><%= link_to "Edit this Building" , edit_building_path(building) %></td>
+    </tr>
+    <% end %>
+  </tr>
+</table>

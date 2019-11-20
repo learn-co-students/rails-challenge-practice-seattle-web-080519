@@ -1,14 +1,16 @@
 <h1>Show an Office</h1>
 
-<% byebug %>
 
 <h3>Office</h3>
 ID: <%= @office.id %><br>
 Floor: <%= @office.floor %><br>
 Building id: <%= @office.building_id %><br>
 Company id: <%= @office.company_id %><br>
-# Employees: <%= @office.company.employees.count %><br>
-List of Employees: <%= @office.company.employees.pluck("name", "title").flatten %><br>
+# Employees: <%= @office.num_employees %><br>
+List of Employees:<br>
+<% @office.list_employees.each do |emp| %>
+  <%= emp %><br>
+<% end %>
 
 <h3>Building</h3>
 Name: <%= @office.building.name %><br>
