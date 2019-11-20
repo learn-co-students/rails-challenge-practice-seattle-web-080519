@@ -16,7 +16,7 @@
 		<%= f.fields_for :offices, b do |b_field| %>
 			<%= b_field.hidden_field :id %>
 			<%= b_field.label b.name %>
-			<%= b_field.collection_check_boxes :offices, b.empty_offices, :floor, :floor %>
+			<%= b_field.collection_check_boxes :offices, b.floors_available, :floor, :floor %><br>
 		<% end %>
 	<% end %>
 	<br>
