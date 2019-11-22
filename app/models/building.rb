@@ -18,14 +18,11 @@ class Building < ApplicationRecord
 
   def current_company_floors
     puts "x"
-    byebug
   end
 
   def floors_available_and_curr_company_floors
-    byebug
   
     puts "x"
-    byebug
     # floors_available << self.floor
     # floors_available
   end
