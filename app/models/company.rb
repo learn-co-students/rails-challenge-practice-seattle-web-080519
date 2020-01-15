@@ -23,5 +23,11 @@ class Company < ApplicationRecord
     self.buildings.pluck("rent_per_floor").sum
   end
 
+  def current_company_floors
+    self.offices.map do |office|
+      byebug
+      office.buildings
+    end
+  end
 
 end

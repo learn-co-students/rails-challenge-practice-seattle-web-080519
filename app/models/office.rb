@@ -13,4 +13,6 @@ class Office < ApplicationRecord
     end
   end
 
+  
+
 end
