@@ -1,5 +1,6 @@
 <h1>Edit a Company</h1>
 
+<%= render partial: "companies/errors", locals: {user: @company} %>
 <!-- <%= render partial: "form" %> -->
 
 <%= @company.name %>
@@ -27,14 +28,10 @@
 	<% end %>
 	<br>
 	<%= f.submit %>
+<% end %>
 
 
-<h3>Employees List: </h3>
-<% @company.employees.each do |employee| %>
-  Name: <%= employee.name %>, Title: <%= employee.title %>
-  <%= employee.collection_check_boxes :employee, Employee.all, :name, :id%><br>
-<% end %>
-<% end %>
+<!-- wont submt. asks for employees -->
 <!-- checked: b.floors_available.!include(b.floor) -->
 <!--  want to show list of floors that are available, including ones that this company already has rented. Then, show the available ones as open, and rented as checked. -->
 

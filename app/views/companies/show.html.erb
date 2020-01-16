@@ -1,6 +1,8 @@
 <h1>View a Company</h1>
 <%= render partial: "companies/errors", locals: {user: @company} %>
 
+<%= link_to "Edit this Company", edit_company_path(@company.id) %> 
+
 <h3>Name: <%= @company.name %></h3>
 <h3>Offices: </h3>
 <% @company.office_info.each do |office_info| %>
@@ -47,4 +49,3 @@
   </tbody>
 </table>
 <br>
-<%= link_to "Edit this Company", edit_company_path(@company.id) %> 
