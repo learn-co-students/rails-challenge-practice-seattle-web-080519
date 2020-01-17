@@ -27,8 +27,8 @@ class CompaniesController < ApplicationController
           end
         end
       end
-    flash[:success] = "Company successfully created"
-    redirect_to company_path(@company)
+      flash[:success] = "Company successfully created"
+      redirect_to company_path(@company)
     else
       flash[:error] = "Company not created"
       render :new
@@ -40,13 +40,26 @@ class CompaniesController < ApplicationController
   end
 
   def update
+    # if employees is in params, do this way, else
     find_company
-    if @company.employees.create(employee_params) && @company.update(company_params)
-      flash[:success] = "Company successfully updated"
-      redirect_to company_path(@company)
-    else
-      flash[:error] = "Company not updated"
-      render :edit
+    byebug
+    @company.offices_attributes << params[:company][:offices_attributes]
+    if params[:employees].nil?
+      if @company.update(company_params)
+        flash[:success] = "Company successfully updated"
+        redirect_to company_path(@company)
+      else
+        flash[:error] = "Company not updated"
+        render :edit
+      end
+    else 
+      if @company.employees.create(employee_params) && @company.update(company_params)
+        flash[:success] = "Company successfully updated"
+        redirect_to company_path(@company)
+      else
+        flash[:error] = "Company not updated"
+        render :edit
+      end
     end
   end
 
@@ -101,7 +114,7 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name)
+    params.require(:company).permit(:name, offices_attributes: [])
   end
 
   def employee_params

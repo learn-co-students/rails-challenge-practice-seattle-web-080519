@@ -9,6 +9,7 @@ class OfficesController < ApplicationController
   end
 
   private
+  
   def find_office
     @office = Office.find(params[:id])
   end

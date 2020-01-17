@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :buildings, only: [:index, :show, :edit, :update]
   resources :companies
-
   resources :offices, only: [:index, :show]
 
   # get '/offices', to: 'companies#index_of_offices', as: 'offices'

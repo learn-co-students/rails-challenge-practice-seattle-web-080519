@@ -14,10 +14,11 @@ class BuildingsController < ApplicationController
 
   def update
     building_finder
-    @building.update(building_params)
-    if @building.save
+    if @building.update(building_params)
+      flash[:success] = "Building Updated"
       redirect_to building_path(@building)
     else
+      flash[:error] = "Error in Update"
       render :edit
     end
   end

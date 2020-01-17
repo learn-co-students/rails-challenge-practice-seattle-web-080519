@@ -7,6 +7,7 @@
     <td>Total Floors</td>
     <td>Num Floors Available</td>
     <td>Floors Available</td>
+    <td>Floors Rented</td>
     <td>Rent/Floor</td>
   </tr>
   <tr>
@@ -18,6 +19,7 @@
       <td><%= building.number_of_floors %></td>
       <td><%= building.empty_offices %></td>
       <td><%= building.floors_available.join(", ") %></td>
+      <td><%= building.floors_rented.join(", ") %></td>
       <td><%= building.rent_per_floor %></td>
       <td><%= link_to "View this Building", building_path(building) %></td>
       <td><%= link_to "Edit this Building" , edit_building_path(building) %></td>

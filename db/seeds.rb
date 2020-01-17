@@ -64,5 +64,3 @@ end
     floor: random_building_floors_array.delete(random_building_floors_array.sample)
   )
 end
-
-puts "seeds done!"
