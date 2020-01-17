@@ -6,7 +6,7 @@ class Company < ApplicationRecord
   accepts_nested_attributes_for :employees
   accepts_nested_attributes_for :offices
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   def office_info
     result = self.offices.map do |office|
@@ -25,7 +25,6 @@ class Company < ApplicationRecord
 
   def current_company_floors
     self.offices.map do |office|
-      byebug
       office.buildings
     end
   end

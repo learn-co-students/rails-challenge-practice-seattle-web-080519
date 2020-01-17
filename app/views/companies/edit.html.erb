@@ -1,5 +1,6 @@
 <h1>Edit a Company</h1>
 
+<%= render partial: "companies/errors", locals: {user: @company} %>
 <!-- <%= render partial: "form" %> -->
 
 <%= @company.name %>
@@ -16,7 +17,7 @@
 <p>Building Floors Available</p>
 	<% Building.all.each do |b| %>
     <%= f.fields_for :offices, b do |b_field| %>
-			<%= b_field.hidden_field :id %>
+	    <%= b_field.hidden_field :id %>
       <%= b_field.label b.name %>
 			<%= b_field.collection_check_boxes :offices, b.floors_available_and_curr_company_floors(params[:id]), :floor, :floor , 
       { checked: (b.current_company_floors(params[:id])) }%><br>
