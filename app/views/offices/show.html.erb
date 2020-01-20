@@ -12,9 +12,21 @@ Building name: <%= @office.building.name %><br>
 Company id: <%= @office.company_id %><br>
 # Employees: <%= @office.num_employees %><br>
 List of Employees:<br>
-<% @office.list_employees.each do |emp| %>
-  <%= emp %><br>
-<% end %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Title</th>
+  </tr>
+  </thead>
+  <% @office.list_employees.each do |emp| %>
+    <tr>
+      <td><%= emp.name %></td>
+      <td><%= emp.title %></td>
+    </tr>
+  <% end %>
+</table>
 
 <h3>Building</h3>
 Name: <%= @office.building.name %><br>

@@ -1,7 +1,4 @@
 <h1>View a Company</h1>
-<%= render partial: "companies/errors", locals: {user: @company} %>
-
-<%= link_to "Edit this Company", edit_company_path(@company.id) %> 
 
 <h3>Name: <%= @company.name %></h3>
 <h3>Offices: </h3>
@@ -9,13 +6,18 @@
   <%= office_info %><br>
 <% end %>
 <br>
-<%= link_to "Edit this Company", edit_company_path(@company.id) %> 
 
 <h3>Company's Total Rent: </h3>
-<%= @company.total_rent %>
+<%= number_with_delimiter(@company.total_rent) %>
+<br>
+<br>
+<%= link_to "Edit this Company", edit_company_path(@company.id) %> 
 
+<hr>
+<%= render partial: "companies/errors", locals: {user: @employee} %>
+
+<br>
 <h3>Add an Employee</h3>
-
 <%= form_for @employee do |f| %>
   <div class="field">  
     <%= f.label :name %>
@@ -45,7 +47,7 @@
       <tr>
         <td><%= employee.name %></td> 
         <td><%= employee.title %></td>
-        <td><%= link_to "Delete Employee", employee_delete_path(employee.id), method: :delete, data: { confirm: "Really?" } %></td>
+        <td><%= link_to "Delete Employee", employee_path(employee.id), method: :delete, data: { confirm: "Really?" } %></td>
       </tr>
     <% end %>
   </tbody>

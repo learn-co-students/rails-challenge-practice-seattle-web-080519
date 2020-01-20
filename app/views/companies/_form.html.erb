@@ -1,19 +1,18 @@
 <%= form_for @company do |f| %>
 
-<p>Company Details</p>
+<p>Company Details:</p>
 	<%= f.label :name %>
 	<%= f.text_field :name %>
 
-<p>Building Floors Available</p>
+<p>Building Floors Available:</p>
 	<% Building.all.each do |b| %>
 		<%= f.fields_for :offices, b do |b_field| %>
 			<%= b_field.hidden_field :id %>
 			<%= b_field.label b.name %>
-			<%= b_field.collection_check_boxes :offices, b.floors_available, :floor, :floor %><br>
+			<%= b_field.collection_check_boxes :offices, b.floors_available_and_curr_company_floors(params[:id]), :floor, :floor , 
+      { checked: (b.current_company_floors(params[:id])) }%><br>
 		<% end %>
 	<% end %>
 	<br>
-
-
 	<%= f.submit %>
 <% end %>

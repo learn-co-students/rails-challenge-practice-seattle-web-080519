@@ -1,17 +1,34 @@
 <h1>Show a Building</h1>
 
+<%= link_to "Edit this Building" , edit_building_path(@building) %>
+
 <h3>Building Name: <%= @building.name %></h3>
 <h3>Address: <%= @building.address %></h3>
 <h3>Country: <%= @building.country %></h3>
-<h3>Floors: <%= @building.number_of_floors %></h3>
-<h3>Floors Available: <%= @building.floors_available.join(", ") %></h3>
-<h3># Empty Floors: <%= @building.empty_offices %></h3>
-<h3>Rent/Floor: <%= @building.rent_per_floor %></h3>
-<h3>Total Rent: $<%= @building.total_rent %></h3>
+<h3>Number of Rentable Floors: <%= @building.number_of_floors %></h3>
+<h3>Floors Rented: <%= @building.floors_rented.join(", ") %></h3>
+<h3>Number of Available Floors: <%= @building.empty_offices %></h3>
+<h3>Available Floor Numbers: <%= @building.floors_available.join(", ") %></h3>
+<h3>Rent/Floor: <%= number_with_delimiter(@building.rent_per_floor) %></h3>
+<h3>Total Rent: $<%= number_with_delimiter(@building.total_rent) %></h3>
+<h3>Number of Employees: <%= @building.total_employees %></h3>
 
 <h3>Building Tennants: </h3>
-<% @building.companies.each do |company| %>
-  <%= company.name %><%= company.offices.pluck("floor") %> <br>
-<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Floor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @building.offices_sorted.each do |office| %>
+      <tr>
+        <td><%= office.company.name %></td> 
+        <td><%= office.floor %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br>
-<%= link_to "Edit this Building" , edit_building_path(@building) %>

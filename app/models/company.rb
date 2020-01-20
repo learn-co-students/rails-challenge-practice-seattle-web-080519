@@ -6,13 +6,12 @@ class Company < ApplicationRecord
   accepts_nested_attributes_for :employees
   accepts_nested_attributes_for :offices
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 5 }
 
   def office_info
-    result = self.offices.map do |office|
-      "Floor # #{office.floor} in #{office.building.name} costs #{office.building.rent_per_floor}."
+    self.offices.map do |office|
+      "Floor ##{office.floor} in #{office.building.name} costs #{office.building.rent_per_floor}."
     end
-    result 
   end
 
   def building_info

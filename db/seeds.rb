@@ -55,12 +55,26 @@ titles = [
   )
 end
 
-10.times do 
-  random_building = Building.all.sample
-  random_building_floors_array = (1..random_building.number_of_floors).to_a
+offices_array=[]
+weworks.each do |building|
+  floor_ar = (1..building[:number_of_floors]).to_a
+  offices_array << floor_ar
+end
+
+counter = 1
+16.times do 
+  random_building = rand(1..Building.count)-1
+  random_floor = offices_array[random_building].delete(offices_array[random_building].sample)
   Office.create(
     company: Company.all.sample,
-    building: random_building,
-    floor: random_building_floors_array.delete(random_building_floors_array.sample)
+    building: Building.all[random_building],
+    floor: random_floor
   )
+  # puts "counter= #{counter}"
+  # puts "random_building= #{random_building}"
+  # puts "random_floor= #{random_floor}"
+  # puts "offices_array= #{offices_array}"
+  # puts offices_array.flatten.size
+  # puts "================================"
+  # counter +=1
 end

@@ -1,6 +1,7 @@
 class Office < ApplicationRecord
   belongs_to :building
   belongs_to :company
+
   validates :floor, numericality: { only_integer: true }
 
   def num_employees
@@ -8,11 +9,10 @@ class Office < ApplicationRecord
   end
 
   def list_employees
-    self.company.employees.pluck("name", "title").map do |emp|
-      "Name: #{emp[0]}, Title: #{emp[1]}"
-    end
+    # self.company.employees.pluck("name", "title").map do |emp|
+    #   "Name: #{emp[0]}, Title: #{emp[1]}"
+    # end
+    self.company.employees
   end
-
-  
 
 end

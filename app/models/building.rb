@@ -58,4 +58,18 @@ class Building < ApplicationRecord
     companies.count * self.rent_per_floor
   end
 
+  def total_employees
+    sum = 0
+    self.companies.each do |company|
+      sum += company.employees.size
+    end
+    sum
+  end
+
+  def offices_sorted
+    self.offices.sort_by do |office|
+      office.floor
+    end
+  end
+
 end

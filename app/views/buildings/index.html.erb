@@ -1,14 +1,14 @@
 <h1>View all Buildings</h1>
 <table>
   <tr>
-    <td>Name </td>
-    <td>Address </td>
-    <td>Country </td>
-    <td>Total Floors</td>
-    <td>Num Floors Available</td>
-    <td>Floors Available</td>
-    <td>Floors Rented</td>
-    <td>Rent/Floor</td>
+    <th>Name </th>
+    <th>Address </th>
+    <th>Country </th>
+    <th>Total Floors</th>
+    <th>Num Floors Available</th>
+    <th>Floors Available</th>
+    <th>Floors Rented</th>
+    <th>Rent/Floor</th>
   </tr>
   <tr>
     <% @buildings.each do |building| %>
@@ -18,9 +18,9 @@
       <td><%= building.country %></td>
       <td><%= building.number_of_floors %></td>
       <td><%= building.empty_offices %></td>
-      <td><%= building.floors_available.join(", ") %></td>
-      <td><%= building.floors_rented.join(", ") %></td>
-      <td><%= building.rent_per_floor %></td>
+      <td><%= building.floors_available.size > 0 ?  building.floors_available.join(", ") : "None Available"%></td>
+      <td><%= building.floors_rented.size > 0 ? building.floors_rented.join(", ") :  "None Available"%></td>
+      <td><%= number_with_delimiter(building.rent_per_floor) %></td>
       <td><%= link_to "View this Building", building_path(building) %></td>
       <td><%= link_to "Edit this Building" , edit_building_path(building) %></td>
     </tr>

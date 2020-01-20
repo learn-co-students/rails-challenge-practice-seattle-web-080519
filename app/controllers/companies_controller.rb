@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
   def show
     find_company
     @employee = Employee.new
+    byebug
   end
 
   def new
@@ -31,6 +32,7 @@ class CompaniesController < ApplicationController
       redirect_to company_path(@company)
     else
       flash[:error] = "Company not created"
+      puts @company.errors.full_messages
       render :new
     end
   end
@@ -42,7 +44,6 @@ class CompaniesController < ApplicationController
   def update
     # if employees is in params, do this way, else
     find_company
-    byebug
     @company.offices_attributes << params[:company][:offices_attributes]
     if params[:employees].nil?
       if @company.update(company_params)
@@ -58,54 +59,34 @@ class CompaniesController < ApplicationController
         redirect_to company_path(@company)
       else
         flash[:error] = "Company not updated"
+        puts @company.errors.full_messages
         render :edit
       end
     end
   end
 
-  def destroy
-    @company = Company.find(params[:id])
-    if @company.destroy
-      flash[:success] = "Company successfully deleted"
-    else
-      flash[:error] = "Company not deleted"
-    end
-    redirect_to request.referrer
-  end
+  # def destroy
+  #   @company = Company.find(params[:id])
+  #   if @company.destroy
+  #     flash[:success] = "Company successfully deleted"
+  #   else
+  #     flash[:error] = "Company not deleted"
+  #   end
+  #   redirect_to request.referrer
+  # end
 
-  def add_employee
-    @company = Company.find(params[:employee][:company_id])
-    @employee = Employee.new(employee_params)
-    if @employee.save
-      flash[:success] = "Employee successfully added"
-      redirect_to company_path(@company.id)
-    else
-      flash[:error] = "Employee not added"
-      puts "Error in add employee, #{@employee.errors.full_messages}"
-      redirect_to company_path(@company.id)
-    end
-  end
-
-  def destroy_employee
-    @employee = Employee.find(params[:id])
-    if @employee.destroy
-      flash[:success] = "Employee successfully deleted"
-    else
-      flash[:error] = "Employee not deleted"
-    end
-    redirect_to request.referrer
-  end
-
-  def show_office
-    @office = Office.find(params[:id])
-    # redirect_to show_office
-  end
-
-  def index_of_offices
-    @offices = Office.all
-    # redirect_to offices_path
-  end
-
+  # def add_employee
+  #   @company = Company.find(params[:employee][:company_id])
+  #   @employee = Employee.new(employee_params)
+  #   if @employee.save
+  #     flash[:success] = "Employee successfully added"
+  #     redirect_to company_path(@company.id)
+  #   else
+  #     flash[:error] = "Employee not added"
+  #     puts "Error in add employee, #{@employee.errors.full_messages}"
+  #     redirect_to company_path(@company.id)
+  #   end
+  # end
 
   private 
 
@@ -115,10 +96,6 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name, offices_attributes: [])
-  end
-
-  def employee_params
-    params.require(:employee).permit(:name, :title, :company_id)
   end
 
 end

@@ -1,6 +1,12 @@
 <h1>View all Companies</h1>
 <table>
-  <tr>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @companies.each do |company| %>
     <tr>
       <td><%= company.name %></td>
@@ -11,5 +17,7 @@
     </tr>
   <% end %>
   </tr>
+  </tbody>
 </table>
+<br>
 <%= link_to "Add a new Company", new_company_path %>

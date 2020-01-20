@@ -2,20 +2,20 @@
 
 <table>
   <tr>
-    <td>Company Name</td>
-    <td>Buidling Name</td>
-    <td>Floor</td>
-    <td>Id</td>
+    <th>Company Name</th>
+    <th>Buidling Name</th>
+    <th>Floor</th>
+    <th>Id</th>
   </tr>
   <tr>
-      <% @offices.each do |office| %>
-        <tr>
-          <td><%= office.company.name %></td>
-          <td><%= office.building.name %></td>
-          <td><%= office.floor %></td>
-          <td><%= office.id %></td>
-          <td> <%= link_to "View this Office", office_path(office) %></td>
-        </tr>
-      <% end %>
+    <% @offices.each do |office| %>
+      <tr>
+        <td><%= office.company.name %></td>
+        <td><%= office.building.name %></td>
+        <td><%= office.floor %></td>
+        <td><%= office.id %></td>
+        <td> <%= link_to "View this Office", office_path(office) %></td>
+      </tr>
+    <% end %>
   </tr>
 </table>
