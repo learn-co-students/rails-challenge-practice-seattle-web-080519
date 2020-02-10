@@ -19,9 +19,9 @@ class EmployeesController < ApplicationController
       redirect_to company_path(@employee.company_id)
     else
       byebug
-      flash[:error] = "Error in employee Create, #{@employee.errors.full_messages}"
-      puts @employee.errors.full_messages
-      redirect_to request.referer
+      flash[:flash_errors] = "Error in employee Create, #{@employee.errors.full_messages}"
+      puts "\n #{@employee.errors.full_messages} \n"
+      redirect_to company_path(params[:employee][:company_id])
     end
   end
 
@@ -30,7 +30,7 @@ class EmployeesController < ApplicationController
     if @employee.destroy
       flash[:success] = "Employee successfully deleted"
     else
-      flash[:error] = "Employee not deleted"
+      flash[:flash_errors] = "Employee not deleted"
     end
     redirect_to request.referrer
   end

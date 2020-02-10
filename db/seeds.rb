@@ -61,20 +61,20 @@ weworks.each do |building|
   offices_array << floor_ar
 end
 
-counter = 1
-16.times do 
-  random_building = rand(1..Building.count)-1
+buildings_array = (0..(Building.count-1)).to_a
+
+(offices_array.flatten.count/2).times do 
+  random_building = buildings_array.sample
+  if offices_array[random_building].size <= 2
+    buildings_array.delete(random_building)
+    random_building = buildings_array.sample
+  end
   random_floor = offices_array[random_building].delete(offices_array[random_building].sample)
   Office.create(
     company: Company.all.sample,
     building: Building.all[random_building],
     floor: random_floor
   )
-  # puts "counter= #{counter}"
-  # puts "random_building= #{random_building}"
-  # puts "random_floor= #{random_floor}"
-  # puts "offices_array= #{offices_array}"
-  # puts offices_array.flatten.size
-  # puts "================================"
-  # counter +=1
 end
+
+puts "seeds done"

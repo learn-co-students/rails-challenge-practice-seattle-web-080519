@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :offices, only: [:index, :show]
   resources :companies, only: [:index, :show, :new, :create, :edit, :update]
   resources :employees, only: [:index, :show, :new, :create, :destroy]
-  # resources :employees
+  get '/', to: 'application#home', as: 'root_path'
 end

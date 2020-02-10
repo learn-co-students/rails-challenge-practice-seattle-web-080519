@@ -7,6 +7,7 @@
 <% end %>
 <br>
 
+
 <h3>Company's Total Rent: </h3>
 <%= number_with_delimiter(@company.total_rent) %>
 <br>
@@ -14,41 +15,8 @@
 <%= link_to "Edit this Company", edit_company_path(@company.id) %> 
 
 <hr>
-<%= render partial: "companies/errors", locals: {user: @employee} %>
 
 <br>
-<h3>Add an Employee</h3>
-<%= form_for @employee do |f| %>
-  <div class="field">  
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
 
-   <div class="field">  
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  
-  <%= f.hidden_field :company_id, value: @company.id %>
-  <%= f.submit %>
-<% end %>
-<br>
-
-<h3>Employees List: </h3>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Title</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @company.employees.each do |employee| %>
-      <tr>
-        <td><%= employee.name %></td> 
-        <td><%= employee.title %></td>
-        <td><%= link_to "Delete Employee", employee_path(employee.id), method: :delete, data: { confirm: "Really?" } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render "employees/show" %>
+<%= render "employees/index" %>

@@ -11,7 +11,7 @@ class Building < ApplicationRecord
 
   # create an array of all floors
   def all_floors
-    all_floors = Array(1...self.number_of_floors)
+    all_floors = Array(1..self.number_of_floors)
   end
 
   # the floors rented
@@ -59,6 +59,7 @@ class Building < ApplicationRecord
   end
 
   def total_employees
+    byebug
     sum = 0
     self.companies.each do |company|
       sum += company.employees.size

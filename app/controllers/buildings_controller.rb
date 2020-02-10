@@ -18,7 +18,7 @@ class BuildingsController < ApplicationController
       flash[:success] = "Building Updated"
       redirect_to building_path(@building)
     else
-      flash[:error] = "Error in Update"
+      flash[:flash_errors] = "Error in Update"
       render :edit
     end
   end

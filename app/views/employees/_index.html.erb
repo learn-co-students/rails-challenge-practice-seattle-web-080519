@@ -1,0 +1,21 @@
+<h1>Employees List </h1>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @company.employees.each do |employee| %>
+      <tr>
+        <td><%= employee.name %></td> 
+        <td><%= employee.title %></td>
+        <td><%= link_to "Delete Employee", employee_path(employee.id), method: :delete, data: { confirm: "Really?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

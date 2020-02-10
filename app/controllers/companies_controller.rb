@@ -7,7 +7,6 @@ class CompaniesController < ApplicationController
   def show
     find_company
     @employee = Employee.new
-    byebug
   end
 
   def new
@@ -15,6 +14,8 @@ class CompaniesController < ApplicationController
   end
 
   def create
+    @employee = Employee.new(employee_params)
+    @employee.save
     @company = Company.new(company_params)
     if @company.save
       params[:company][:offices_attributes].each do |k, building_data|
@@ -31,7 +32,7 @@ class CompaniesController < ApplicationController
       flash[:success] = "Company successfully created"
       redirect_to company_path(@company)
     else
-      flash[:error] = "Company not created"
+      flash[:flash_errors] = "Company not created"
       puts @company.errors.full_messages
       render :new
     end
@@ -42,52 +43,32 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    # if employees is in params, do this way, else
     find_company
-    @company.offices_attributes << params[:company][:offices_attributes]
-    if params[:employees].nil?
-      if @company.update(company_params)
-        flash[:success] = "Company successfully updated"
-        redirect_to company_path(@company)
-      else
-        flash[:error] = "Company not updated"
-        render :edit
+    if @company.update(company_params)
+      params[:company][:offices_attributes].each do |key, building_data|
+        @building = Building.find(building_data[:id])
+        if @building
+          @floors = (building_data[:offices]-[""]).map{|x|x.to_i}
+          @floors.each do |floor|
+            if @building.floors_rented.none?(floor)
+              Office.create(building: @building, company: @company, floor: floor)
+            end
+          end
+          @company_floors = @building.current_company_floors(@company.id)
+          deleted_floors = @company_floors - @floors
+          deleted_floors.each do |df|
+            Office.delete(Office.where(building_id: @building.id, floor: df))
+          end
+        end
       end
-    else 
-      if @company.employees.create(employee_params) && @company.update(company_params)
-        flash[:success] = "Company successfully updated"
-        redirect_to company_path(@company)
-      else
-        flash[:error] = "Company not updated"
-        puts @company.errors.full_messages
-        render :edit
-      end
+      flash[:success] = "Company successfully updated"
+      redirect_to company_path(@company)
+    else
+      flash[:flash_errors] = "Company not updated, #{@company.errors.full_messages}"
+      render :edit
     end
   end
-
-  # def destroy
-  #   @company = Company.find(params[:id])
-  #   if @company.destroy
-  #     flash[:success] = "Company successfully deleted"
-  #   else
-  #     flash[:error] = "Company not deleted"
-  #   end
-  #   redirect_to request.referrer
-  # end
-
-  # def add_employee
-  #   @company = Company.find(params[:employee][:company_id])
-  #   @employee = Employee.new(employee_params)
-  #   if @employee.save
-  #     flash[:success] = "Employee successfully added"
-  #     redirect_to company_path(@company.id)
-  #   else
-  #     flash[:error] = "Employee not added"
-  #     puts "Error in add employee, #{@employee.errors.full_messages}"
-  #     redirect_to company_path(@company.id)
-  #   end
-  # end
-
+  
   private 
 
   def find_company
@@ -95,7 +76,11 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name, offices_attributes: [])
+    params.require(:company).permit(:name, offices_attributes:[])
+  end
+
+  def employee_params
+    params.require(:employee).permit(:name, :title, :company_id)
   end
 
 end
